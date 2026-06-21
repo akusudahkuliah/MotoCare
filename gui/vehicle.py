@@ -12,7 +12,8 @@ from gui.components import (
 )
 
 from core.vehicle import (
-    get_motorcycle_names
+    get_motorcycle_names,
+    get_default_fuel
 )
 
 
@@ -23,7 +24,8 @@ from core.vehicle import (
 def create_vehicle_page(
     root,
     on_back,
-    on_save
+    on_save,
+    vehicle=None
 ):
 
     clear_frame(root)
@@ -43,7 +45,9 @@ def create_vehicle_page(
         on_back
     )
 
-    notebook = create_notebook(root)
+    notebook = create_notebook(
+        root
+    )
 
     notebook.grid(
         row=1,
@@ -92,7 +96,8 @@ def create_vehicle_page(
 
     create_vehicle_tab(
         vehicle_tab,
-        on_save
+        on_save,
+        vehicle
     )
 
     create_placeholder_tab(
@@ -167,7 +172,8 @@ def create_header(
 
 def create_vehicle_tab(
     parent,
-    on_save
+    on_save,
+    vehicle=None
 ):
 
     frame = tk.Frame(parent)
@@ -184,33 +190,79 @@ def create_vehicle_tab(
     # ==========================
 
     model_var = tk.StringVar()
-
     plate_var = tk.StringVar()
-
     odometer_var = tk.StringVar()
 
     fuel_var = tk.StringVar()
-
     daily_var = tk.StringVar()
 
     pkb_var = tk.StringVar()
-
     swdkllj_var = tk.StringVar()
-
     due_var = tk.StringVar()
 
     engine_oil_var = tk.StringVar()
-
     cvt_oil_var = tk.StringVar()
-
     cvt_clean_var = tk.StringVar()
 
     chain_var = tk.StringVar()
-
     chain_lube_var = tk.StringVar()
 
+    if vehicle is not None:
+
+        model_var.set(
+            vehicle["model"]
+        )
+
+        plate_var.set(
+            vehicle["plate_number"]
+        )
+
+        odometer_var.set(
+            vehicle["current_odometer"]
+        )
+
+        fuel_var.set(
+            vehicle["fuel_type"]
+        )
+
+        daily_var.set(
+            vehicle["daily_distance"]
+        )
+
+        pkb_var.set(
+            vehicle["pkb"]
+        )
+
+        swdkllj_var.set(
+            vehicle["swdkllj"]
+        )
+
+        due_var.set(
+            vehicle["due_date"]
+        )
+
+        engine_oil_var.set(
+            vehicle["last_engine_oil"]
+        )
+
+        cvt_oil_var.set(
+            vehicle["last_cvt_oil"]
+        )
+
+        cvt_clean_var.set(
+            vehicle["last_cvt_cleaning"]
+        )
+
+        chain_var.set(
+            vehicle["last_chain"]
+        )
+
+        chain_lube_var.set(
+            vehicle["last_chain_lube"]
+        )
+
     # ==========================
-    # Left
+    # Left Frame
     # ==========================
 
     left = tk.Frame(frame)
@@ -219,13 +271,17 @@ def create_vehicle_tab(
         row=0,
         column=0,
         sticky="nw",
-        padx=(0,30)
+        padx=(0,40)
     )
 
     create_label(
         left,
         "Motorcycle"
-    ).grid(row=0,column=0,sticky="w")
+    ).grid(
+        row=0,
+        column=0,
+        sticky="w"
+    )
 
     motorcycle = create_combobox(
         left,
@@ -239,10 +295,27 @@ def create_vehicle_tab(
         pady=(0,10)
     )
 
+    def update_motorcycle(event=None):
+
+        fuel = get_default_fuel(
+            model_var.get()
+        )
+
+        fuel_var.set(fuel)
+
+    motorcycle.bind(
+        "<<ComboboxSelected>>",
+        update_motorcycle
+    )
+
     create_label(
         left,
         "Plate Number"
-    ).grid(row=2,column=0,sticky="w")
+    ).grid(
+        row=2,
+        column=0,
+        sticky="w"
+    )
 
     create_entry(
         left,
@@ -256,7 +329,11 @@ def create_vehicle_tab(
     create_label(
         left,
         "Current Odometer"
-    ).grid(row=4,column=0,sticky="w")
+    ).grid(
+        row=4,
+        column=0,
+        sticky="w"
+    )
 
     create_entry(
         left,
@@ -270,7 +347,11 @@ def create_vehicle_tab(
     create_label(
         left,
         "Fuel Type"
-    ).grid(row=6,column=0,sticky="w")
+    ).grid(
+        row=6,
+        column=0,
+        sticky="w"
+    )
 
     fuel = create_combobox(
         left,
@@ -293,7 +374,11 @@ def create_vehicle_tab(
     create_label(
         left,
         "Daily Distance (km)"
-    ).grid(row=8,column=0,sticky="w")
+    ).grid(
+        row=8,
+        column=0,
+        sticky="w"
+    )
 
     create_entry(
         left,
@@ -306,7 +391,7 @@ def create_vehicle_tab(
 
 
     # ==========================
-    # Right
+    # Right Frame
     # ==========================
 
     right = tk.Frame(frame)
@@ -361,7 +446,7 @@ def create_vehicle_tab(
 
     create_label(
         right,
-        "Last Engine Oil"
+        "Last Engine Oil (km)"
     ).grid(row=6,column=0,sticky="w")
 
     create_entry(
@@ -375,7 +460,7 @@ def create_vehicle_tab(
 
     create_label(
         right,
-        "Last CVT Oil"
+        "Last CVT Oil (km)"
     ).grid(row=8,column=0,sticky="w")
 
     create_entry(
@@ -389,7 +474,7 @@ def create_vehicle_tab(
 
     create_label(
         right,
-        "Last CVT Cleaning"
+        "Last CVT Cleaning (km)"
     ).grid(row=10,column=0,sticky="w")
 
     create_entry(
@@ -403,7 +488,7 @@ def create_vehicle_tab(
 
     create_label(
         right,
-        "Last Chain"
+        "Last Chain (km)"
     ).grid(row=12,column=0,sticky="w")
 
     create_entry(
@@ -417,7 +502,7 @@ def create_vehicle_tab(
 
     create_label(
         right,
-        "Last Chain Lube"
+        "Last Chain Lube (km)"
     ).grid(row=14,column=0,sticky="w")
 
     create_entry(
@@ -429,9 +514,21 @@ def create_vehicle_tab(
         pady=(0,20)
     )
 
+    # ==========================
+    # Save
+    # ==========================
+
     def save():
 
+        vehicle_id = 0
+
+        if vehicle is not None:
+
+            vehicle_id = vehicle["id"]
+
         data = {
+
+            "id": vehicle_id,
 
             "model": model_var.get(),
 
@@ -478,7 +575,7 @@ def create_vehicle_tab(
 
 
 # ==========================================
-# Placeholder
+# Placeholder Tab
 # ==========================================
 
 def create_placeholder_tab(

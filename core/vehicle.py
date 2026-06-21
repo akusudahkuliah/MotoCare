@@ -69,6 +69,21 @@ def get_motorcycle(model):
 
 
 # ==========================================
+# Default Fuel
+# ==========================================
+
+def get_default_fuel(model):
+
+    motorcycle = get_motorcycle(model)
+
+    if motorcycle is None:
+
+        return ""
+
+    return motorcycle["fuel"]
+
+
+# ==========================================
 # ID Generator
 # ==========================================
 
@@ -181,4 +196,26 @@ def delete_vehicle(vehicle_id):
     save_data(
         VEHICLES_FILE,
         new_data
+    )
+
+
+# ==========================================
+# Update
+# ==========================================
+
+def update_vehicle(vehicle):
+
+    vehicles = get_all_vehicles()
+
+    for i in range(len(vehicles)):
+
+        if vehicles[i]["id"] == vehicle["id"]:
+
+            vehicles[i] = vehicle
+
+            break
+
+    save_data(
+        VEHICLES_FILE,
+        vehicles
     )

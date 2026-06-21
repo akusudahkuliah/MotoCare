@@ -1,18 +1,1 @@
-[
-    {
-        "id": 1,
-        "model": "",
-        "plate_number": "B 4734 KZK",
-        "current_odometer": 24500,
-        "pkb": 297500,
-        "swdkllj": 35000,
-        "due_date": "06/07/2027",
-        "fuel_type": "Pertamax",
-        "daily_distance": 40,
-        "last_engine_oil": 24000,
-        "last_cvt_oil": 24000,
-        "last_cvt_cleaning": 20000,
-        "last_chain": 0,
-        "last_chain_lube": 0
-    }
-]
+[]
