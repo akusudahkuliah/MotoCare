@@ -1,1 +1,11 @@
-[]
+[
+    {
+        "id": 1,
+        "vehicle_id": 1,
+        "date": "2026-06-22",
+        "odometer": 25000,
+        "liter": 4.5,
+        "price_per_liter": 13500,
+        "total": 60750
+    }
+]

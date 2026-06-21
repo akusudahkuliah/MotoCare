@@ -1,1 +1,18 @@
-[]
+[
+    {
+        "id": 1,
+        "model": "Honda Beat FI",
+        "plate_number": "",
+        "current_odometer": 0,
+        "fuel_type": "Pertalite",
+        "daily_distance": 0,
+        "pkb": 0,
+        "swdkllj": 0,
+        "due_date": "",
+        "last_engine_oil": 0,
+        "last_cvt_oil": 0,
+        "last_cvt_cleaning": 0,
+        "last_chain": 0,
+        "last_chain_lube": 0
+    }
+]

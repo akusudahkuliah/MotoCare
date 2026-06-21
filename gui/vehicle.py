@@ -20,6 +20,8 @@ from gui.service import (
     create_service_tab
 )
 
+from gui.fuel import create_fuel_tab
+
 
 # ==========================================
 # Vehicle Editor
@@ -112,9 +114,12 @@ def create_vehicle_page(
 
     )
 
-    create_placeholder_tab(
+    create_fuel_tab(
+
         fuel_tab,
-        "Fuel Module\nComing Soon"
+
+        vehicle
+
     )
 
     create_placeholder_tab(
