@@ -9,16 +9,20 @@ from core.storage import (
 )
 
 
-# ==========================================
-# Vehicle
-# ==========================================
+# ==================================================
+# Vehicle CRUD
+# ==================================================
 
 def get_all_vehicles():
 
-    return load_data(VEHICLES_FILE)
+    return load_data(
+        VEHICLES_FILE
+    )
 
 
-def get_vehicle(vehicle_id):
+def get_vehicle(
+    vehicle_id
+):
 
     vehicles = get_all_vehicles()
 
@@ -31,13 +35,140 @@ def get_vehicle(vehicle_id):
     return None
 
 
-# ==========================================
+def generate_vehicle_id():
+
+    vehicles = get_all_vehicles()
+
+    if len(vehicles) == 0:
+
+        return 1
+
+    return max(
+
+        vehicle["id"]
+
+        for vehicle in vehicles
+
+    ) + 1
+
+
+def create_empty_vehicle():
+
+    return {
+
+        "id":0,
+
+        "model":"",
+
+        "plate_number":"",
+
+        "current_odometer":0,
+
+        "fuel_type":"",
+
+        "daily_distance":20,
+
+        "pkb":0,
+
+        "swdkllj":0,
+
+        "due_date":"",
+
+        "last_engine_oil":0,
+
+        "last_cvt_oil":0,
+
+        "last_cvt_cleaning":0,
+
+        "last_chain":0,
+
+        "last_chain_lube":0
+
+    }
+
+
+def save_vehicle(
+    vehicle
+):
+
+    vehicles = get_all_vehicles()
+
+    vehicle["id"] = generate_vehicle_id()
+
+    vehicles.append(
+        vehicle
+    )
+
+    save_data(
+
+        VEHICLES_FILE,
+
+        vehicles
+
+    )
+
+    return vehicle["id"]
+
+
+def update_vehicle(
+    vehicle
+):
+
+    vehicles = get_all_vehicles()
+
+    for index in range(
+        len(vehicles)
+    ):
+
+        if vehicles[index]["id"] == vehicle["id"]:
+
+            vehicles[index] = vehicle
+
+            break
+
+    save_data(
+
+        VEHICLES_FILE,
+
+        vehicles
+
+    )
+
+
+def delete_vehicle(
+    vehicle_id
+):
+
+    vehicles = get_all_vehicles()
+
+    result = []
+
+    for vehicle in vehicles:
+
+        if vehicle["id"] != vehicle_id:
+
+            result.append(
+                vehicle
+            )
+
+    save_data(
+
+        VEHICLES_FILE,
+
+        result
+
+    )
+
+
+# ==================================================
 # Motorcycle Master
-# ==========================================
+# ==================================================
 
 def get_all_motorcycles():
 
-    return load_data(MOTORCYCLES_FILE)
+    return load_data(
+        MOTORCYCLES_FILE
+    )
 
 
 def get_motorcycle_names():
@@ -55,7 +186,9 @@ def get_motorcycle_names():
     return names
 
 
-def get_motorcycle(model):
+def get_motorcycle(
+    model
+):
 
     motorcycles = get_all_motorcycles()
 
@@ -68,154 +201,66 @@ def get_motorcycle(model):
     return None
 
 
-# ==========================================
-# Default Fuel
-# ==========================================
+# ==================================================
+# Default Data
+# ==================================================
 
-def get_default_fuel(model):
+def get_default_fuel(
+    model
+):
 
-    motorcycle = get_motorcycle(model)
+    motorcycle = get_motorcycle(
+        model
+    )
 
     if motorcycle is None:
 
         return ""
 
-    return motorcycle["fuel"]
+    return motorcycle[
+        "fuel_type"
+    ]
 
 
-# ==========================================
-# ID Generator
-# ==========================================
+def get_service_interval(
+    model
+):
 
-def generate_vehicle_id():
+    motorcycle = get_motorcycle(
+        model
+    )
 
-    vehicles = get_all_vehicles()
+    if motorcycle is None:
 
-    if len(vehicles) == 0:
+        return {
 
-        return 1
+            "engine_oil": 0,
 
-    max_id = 0
+            "cvt_oil": 0,
 
-    for vehicle in vehicles:
+            "cvt_clean": 0,
 
-        if vehicle["id"] > max_id:
+            "chain": 0,
 
-            max_id = vehicle["id"]
+            "chain_lube": 0
 
-    return max_id + 1
-
-
-# ==========================================
-# Template
-# ==========================================
-
-def create_empty_vehicle():
+        }
 
     return {
 
-        "id": 0,
+        "engine_oil":
+            motorcycle["engine_oil_interval"],
 
-        "model": "",
+        "cvt_oil":
+            motorcycle["cvt_oil_interval"],
 
-        "plate_number": "",
+        "cvt_clean":
+            motorcycle["cvt_clean_interval"],
 
-        "current_odometer": 0,
+        "chain":
+            motorcycle["chain_interval"],
 
-        "pkb": 0,
-
-        "swdkllj": 0,
-
-        "due_date": "",
-
-        "fuel_type": "",
-
-        "daily_distance": 20,
-
-        "last_engine_oil": 0,
-
-        "last_cvt_oil": 0,
-
-        "last_cvt_cleaning": 0,
-
-        "last_chain": 0,
-
-        "last_chain_lube": 0
+        "chain_lube":
+            motorcycle["chain_lube_interval"]
 
     }
-
-
-# ==========================================
-# Save
-# ==========================================
-
-def save_vehicle(vehicle):
-
-    vehicles = get_all_vehicles()
-
-    if vehicle["id"] == 0:
-
-        vehicle["id"] = generate_vehicle_id()
-
-        vehicles.append(vehicle)
-
-    else:
-
-        for index in range(len(vehicles)):
-
-            if vehicles[index]["id"] == vehicle["id"]:
-
-                vehicles[index] = vehicle
-
-                break
-
-    save_data(
-        VEHICLES_FILE,
-        vehicles
-    )
-
-    return vehicle["id"]
-
-
-# ==========================================
-# Delete
-# ==========================================
-
-def delete_vehicle(vehicle_id):
-
-    vehicles = get_all_vehicles()
-
-    new_data = []
-
-    for vehicle in vehicles:
-
-        if vehicle["id"] != vehicle_id:
-
-            new_data.append(vehicle)
-
-    save_data(
-        VEHICLES_FILE,
-        new_data
-    )
-
-
-# ==========================================
-# Update
-# ==========================================
-
-def update_vehicle(vehicle):
-
-    vehicles = get_all_vehicles()
-
-    for i in range(len(vehicles)):
-
-        if vehicles[i]["id"] == vehicle["id"]:
-
-            vehicles[i] = vehicle
-
-            break
-
-    save_data(
-        VEHICLES_FILE,
-        vehicles
-    )

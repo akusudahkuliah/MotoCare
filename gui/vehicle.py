@@ -16,6 +16,10 @@ from core.vehicle import (
     get_default_fuel
 )
 
+from gui.service import (
+    create_service_tab
+)
+
 
 # ==========================================
 # Vehicle Editor
@@ -100,9 +104,12 @@ def create_vehicle_page(
         vehicle
     )
 
-    create_placeholder_tab(
+    create_service_tab(
+
         service_tab,
-        "Service Module\nComing Soon"
+
+        vehicle
+
     )
 
     create_placeholder_tab(

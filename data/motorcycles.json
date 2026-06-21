@@ -2,91 +2,92 @@
     {
         "model": "Honda Beat FI",
         "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertalite"
+        "type": "Scooter",
+
+        "fuel_type": "Pertalite",
+
+        "engine_oil_interval": 2000,
+        "cvt_oil_interval": 8000,
+        "cvt_clean_interval": 12000,
+
+        "chain_interval": 0,
+        "chain_lube_interval": 0
     },
-    {
-        "model": "Honda Beat Street",
-        "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertalite"
-    },
-    {
-        "model": "Honda Genio",
-        "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertalite"
-    },
-    {
-        "model": "Honda Scoopy",
-        "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertalite"
-    },
-    {
-        "model": "Honda Vario 125",
-        "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertamax"
-    },
+
     {
         "model": "Honda Vario 160",
         "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertamax"
+        "type": "Scooter",
+
+        "fuel_type": "Pertamax",
+
+        "engine_oil_interval": 2000,
+        "cvt_oil_interval": 8000,
+        "cvt_clean_interval": 12000,
+
+        "chain_interval": 0,
+        "chain_lube_interval": 0
     },
-    {
-        "model": "Honda PCX 160",
-        "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertamax"
-    },
-    {
-        "model": "Honda ADV 160",
-        "brand": "Honda",
-        "category": "Scooter",
-        "fuel": "Pertamax"
-    },
-    {
-        "model": "Yamaha Mio M3",
-        "brand": "Yamaha",
-        "category": "Scooter",
-        "fuel": "Pertalite"
-    },
-    {
-        "model": "Yamaha Gear 125",
-        "brand": "Yamaha",
-        "category": "Scooter",
-        "fuel": "Pertalite"
-    },
-    {
-        "model": "Yamaha Fazzio",
-        "brand": "Yamaha",
-        "category": "Scooter",
-        "fuel": "Pertamax"
-    },
-    {
-        "model": "Yamaha Grand Filano",
-        "brand": "Yamaha",
-        "category": "Scooter",
-        "fuel": "Pertamax"
-    },
+
     {
         "model": "Yamaha NMAX 155",
         "brand": "Yamaha",
-        "category": "Scooter",
-        "fuel": "Pertamax"
+        "type": "Scooter",
+
+        "fuel_type": "Pertamax",
+
+        "engine_oil_interval": 3000,
+        "cvt_oil_interval": 9000,
+        "cvt_clean_interval": 12000,
+
+        "chain_interval": 0,
+        "chain_lube_interval": 0
     },
+
     {
-        "model": "Yamaha Aerox 155",
+        "model": "Yamaha MX King 150",
         "brand": "Yamaha",
-        "category": "Scooter",
-        "fuel": "Pertamax"
+        "type": "Manual",
+
+        "fuel_type": "Pertamax",
+
+        "engine_oil_interval": 2500,
+
+        "cvt_oil_interval": 0,
+        "cvt_clean_interval": 0,
+
+        "chain_interval": 12000,
+        "chain_lube_interval": 500
     },
+
+    {
+        "model": "Honda CB150R",
+        "brand": "Honda",
+        "type": "Manual",
+
+        "fuel_type": "Pertamax",
+
+        "engine_oil_interval": 2500,
+
+        "cvt_oil_interval": 0,
+        "cvt_clean_interval": 0,
+
+        "chain_interval": 12000,
+        "chain_lube_interval": 500
+    },
+
     {
         "model": "Custom Motorcycle",
         "brand": "Other",
-        "category": "Custom",
-        "fuel": ""
+        "type": "Custom",
+
+        "fuel_type": "",
+
+        "engine_oil_interval": 0,
+        "cvt_oil_interval": 0,
+        "cvt_clean_interval": 0,
+
+        "chain_interval": 0,
+        "chain_lube_interval": 0
     }
 ]
